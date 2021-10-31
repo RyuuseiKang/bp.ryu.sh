@@ -84,7 +84,7 @@ function App() {
       
 
       <p>(199+{<TextField label="x" type={"number"} value={x} onChange={(e) => {setX(e.target.value)}}/>})×{isType ? '1.2' : '1.25'}×{<TextField label="y" type={"number"}  value={y} onChange={(e) => {setY(e.target.value)}}/>}÷60000</p>
-      <p>{((199 + x) * (isType ? 1.2 : 1.25) * y / 60000).toFixed(3)}</p>
+      <p>{(((199 + parseFloat(x)) * (isType ? 1.2 : 1.25) * parseFloat(y)) / 60000).toFixed(4)}</p>
     </div>
   );
 }
