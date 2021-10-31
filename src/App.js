@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
+import {useTranslation} from "react-i18next";
 
 
 import { styled } from '@mui/system';
@@ -73,18 +74,19 @@ const Root = styled('span')`
 `;
 
 function App() {
+  const {t, i18n} = useTranslation();
   const [isType, setIsType] = useState(true);
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
 
   return (
     <div className="App">
-      <h1>BP 계산기</h1>
-      <FormControlLabel control={<SwitchUnstyled component={Root} sx={{ m: 1 }} checked={isType} onChange={(e) => {setIsType(e.target.checked)}} defaultChecked />} label="1.25 또는 1.2" />
+      <h1>{t('BP 계산')}</h1>
+      <FormControlLabel control={<SwitchUnstyled component={Root} sx={{ m: 1 }} checked={isType} onChange={(e) => {setIsType(e.target.checked)}} defaultChecked />} label={t("1.25 또는 1.2")} />
       
 
-      <p>(199+{<TextField label="x" type={"number"} value={x} onChange={(e) => {setX(e.target.value)}}/>})×{isType ? '1.2' : '1.25'}×{<TextField label="y" type={"number"}  value={y} onChange={(e) => {setY(e.target.value)}}/>}÷60000</p>
-      <p>{(((199 + parseFloat(x)) * (isType ? 1.2 : 1.25) * parseFloat(y)) / 60000).toFixed(4)}</p>
+      <p>(199+{<TextField label={t('대전 상대 레벨')} type={"number"} value={x} onChange={(e) => {setX(e.target.value)}}/>})×{isType ? '1.2' : '1.25'}×{<TextField label={t('OD 수치')} type={"number"}  value={y} onChange={(e) => {setY(e.target.value)}}/>}÷60000</p>
+      <p>={(((199 + parseFloat(x)) * (isType ? 1.2 : 1.25) * parseFloat(y)) / 60000).toFixed(4)}</p>
     </div>
   );
 }
